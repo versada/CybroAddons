@@ -34,7 +34,7 @@ class LoginUserDetail(models.Model):
     def check_credentials(self, password):
         result = super(LoginUserDetail, self).check_credentials(password)
         ip_address = request.httprequest.environ['REMOTE_ADDR']
-        vals = {'name': self.name,
+        vals = {'name': self.sudo().name,
                 'ip_address': ip_address
                 }
         self.env['login.detail'].sudo().create(vals)
